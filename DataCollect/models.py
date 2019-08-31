@@ -11,11 +11,11 @@ class stock_pool(models.Model):
         verbose_name_plural = '股票池'
 
     def __str__(self):
-        return self.stock_code
+        return self.stock_name
 
 class stock_all(models.Model):
-    state_dt = models.DateTimeField('交易日期')
-    stock_code = models.ForeignKey(to=stock_pool,to_field=stock_pool.stock_code,on_delete=None)
+    state_dt = models.DateTimeField('交易日期', auto_now=False)
+    stock_code = models.CharField('股票代码', max_length=200)
     open = models.DecimalField('开盘价', max_digits=20, decimal_places=2)
     close = models.DecimalField('收盘价', max_digits=20, decimal_places=2)
     high = models.DecimalField('最高价', max_digits=20, decimal_places=2)
