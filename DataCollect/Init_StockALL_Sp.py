@@ -25,7 +25,6 @@ if __name__ == '__main__':
     except Exception as err:
         print(err)
     total = len(stock_pool)
-    print(stock_pool)
     # 循环获取单个股票的日线行情
     for i in range(len(stock_pool)):
         try:
@@ -38,7 +37,7 @@ if __name__ == '__main__':
             print('No DATA Code: ' + str(i))
             continue
         for j in range(c_len):
-            resu0 = list(df.ix[c_len-1-j])
+            resu0 = list(df.iloc[c_len-1-j])
             resu = []
             for k in range(len(resu0)):
                 if str(resu0[k]) == 'nan':
@@ -46,11 +45,13 @@ if __name__ == '__main__':
                 else:
                     resu.append(resu0[k])
             state_dt = (datetime.datetime.strptime(resu[1], "%Y%m%d")).strftime('%Y-%m-%d')
+            create_time = datetime.datetime.now()
             try:
-                sql_insert = "INSERT INTO DataCollect_stock_all(state_dt,stock_code,open,close,high,low,vol,amount,pre_close,amt_change,pct_change) VALUES ('%s', '%s', '%.2f', '%.2f','%.2f','%.2f','%i','%.2f','%.2f','%.2f','%.2f')" % (state_dt,str(resu[0]),float(resu[2]),float(resu[5]),float(resu[3]),float(resu[4]),float(resu[9]),float(resu[10]),float(resu[6]),float(resu[7]),float(resu[8]))
+                sql_insert = "INSERT INTO DataCollect_stock_all(state_dt,stock_code,open,close,high,low,vol,amount,pre_close,amt_change,pct_change,create_time) VALUES ('%s', '%s', '%.2f', '%.2f','%.2f','%.2f','%i','%.2f','%.2f','%.2f','%.2f','%s')" % (state_dt,str(resu[0]),float(resu[2]),float(resu[5]),float(resu[3]),float(resu[4]),float(resu[9]),float(resu[10]),float(resu[6]),float(resu[7]),float(resu[8]),create_time)
                 cursor.execute(sql_insert)
                 db.commit()
             except Exception as err:
+                print(err)
                 continue
     cursor.close()
     db.close()

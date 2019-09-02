@@ -4,7 +4,9 @@ from django.db import models
 class stock_pool(models.Model):
     stock_code = models.CharField('股票代码', max_length=200, primary_key=True)
     stock_name = models.CharField('股票名称', max_length=200)
+    is_collect = models.BooleanField('是否采集数据',default=False)
     create_time = models.DateTimeField('创建时间', auto_now=True)
+    update_time = models.DateTimeField('创建时间', auto_now=True)
 
     class Meta:
         verbose_name = '股票池'
