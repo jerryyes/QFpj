@@ -3,9 +3,9 @@ from DataCollect.models import stock_pool,stock_all
 
 # Register your models here.
 class StockPoolAdmin(admin.ModelAdmin):
-    fields = ('stock_code','stock_name')
+    fields = ('stock_code','stock_name','is_collect')
     search_fields = ('stock_name',)
-    list_display = ('stock_code','stock_name','create_time')
+    list_display = ('stock_code','stock_name','is_collect','create_time','update_time')
 
 class StockAllAdmin(admin.ModelAdmin):
     search_fields = ('stock_code',)
