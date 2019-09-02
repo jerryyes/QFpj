@@ -17,7 +17,7 @@ if __name__ == '__main__':
     # 设定需要获取数据的股票池
     stock_pool = []
     try:
-        get_stockpool = "select * from DataCollect_stock_pool where is_collect=TRUE;"
+        get_stockpool = "select * from DataCollect_stock_pool where is_collect=TRUE ;"
         cursor.execute(get_stockpool)
         sp_res = cursor.fetchall()
         for sp in sp_res:
