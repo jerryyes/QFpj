@@ -6,7 +6,7 @@ class stock_pool(models.Model):
     stock_name = models.CharField('股票名称', max_length=200)
     is_collect = models.BooleanField('是否采集数据',default=False)
     create_time = models.DateTimeField('创建时间', auto_now=True)
-    update_time = models.DateTimeField('更新时间', auto_now=True)
+    update_time = models.DateTimeField('上次采集时间', auto_now=False)
 
     class Meta:
         verbose_name = '股票池'
