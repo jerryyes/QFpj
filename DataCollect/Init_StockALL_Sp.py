@@ -2,7 +2,7 @@ import datetime
 import tushare as ts
 import pymysql
 
-if __name__ == '__main__':
+def get_dayline():
 
     # 设置tushare pro的token并获取连接
     ts.set_token('681d6d0996a1852dd2cc4f3251291339ecabc3d716e69a5ab1a9a83e')
@@ -65,3 +65,5 @@ if __name__ == '__main__':
     cursor.close()
     db.close()
     print('All Finished!')
+
+    return stock_pool
