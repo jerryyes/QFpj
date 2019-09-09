@@ -1,6 +1,7 @@
 import datetime
 import tushare as ts
 import pymysql
+from QFpj.settings import DATABASES
 
 def get_dayline():
 
@@ -11,7 +12,9 @@ def get_dayline():
     time_temp = datetime.datetime.now() - datetime.timedelta(days=1)
     end_dt = time_temp.strftime('%Y%m%d')
     # 建立数据库连接,剔除已入库的部分
-    db = pymysql.connect(host='127.0.0.1', user='root', passwd='Qw123456*', db='qfpj', charset='utf8')
+    db = pymysql.connect(host=DATABASES['default']['HOST'], port=int(DATABASES['default']['PORT']),
+                         user=DATABASES['default']['USER'], passwd=DATABASES['default']['PASSWORD'],
+                         db=DATABASES['default']['NAME'], charset='utf8')
     cursor = db.cursor()
     # 设定需要获取数据的股票池
     stock_pool = []
