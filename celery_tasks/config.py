@@ -12,12 +12,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # rabbitMQ
 # BROKER_URL = "amqp://guest@localhost:5672//"
 # redis
-BROKER_URL = "redis://127.0.0.1/6379/6"
+BROKER_URL = "redis://127.0.0.1:6379/6"
 # 指定消息执行结果的位置
 # rabbitMQ
 #CELERY_RESULT_BACKEND = "amqp://guest@localhost:5672//"
 # redis
-CELERY_RESULT_BACKEND = "redis://127.0.0.1/6379/5"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/5"
 # 一定要写下面这句，指定时区，否则celery默认使用utc时间，设置的hour会延迟8小时执行
 CELERY_TIMEZONE = 'Asia/Shanghai'
 
