@@ -26,7 +26,7 @@ CELERYBEAT_SCHEDULE = {
     # 定时任务一：　每5分钟执行一次任务(getSum)
     'DataCollect': {
         "task": "celery_tasks.DataCollect.tasks.get_dayline",
-        "schedule": crontab(minute='*/30'),
+        "schedule": crontab(minute='*/5'),
 #        "args": (4,),
     },
 }
