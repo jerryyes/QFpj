@@ -69,4 +69,4 @@ def get_dayline():
     db.close()
     print('All Finished!')
 
-    return stock_pool
+    return stock_code_list
