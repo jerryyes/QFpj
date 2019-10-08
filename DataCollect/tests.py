@@ -24,4 +24,4 @@ def popsort(unsortedlist):
 
 if __name__=='__main__':
     print(getSum(20))
-    print(popsort([2,10,5,28,44,33,22,20,1,15]))
+    print(popsort([2,10,4,28,44,33,22,20,1,15]))
