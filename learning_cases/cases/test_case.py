@@ -17,6 +17,7 @@ def f(url,headers):
         print(type(content),content)
         print('')
         print(type(text),text)
+    return rejson
  
 start = time.time()
 url = 'http://www.kuaidi100.com/query?type=shunfeng&postid=00001111'
