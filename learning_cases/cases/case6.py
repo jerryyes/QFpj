@@ -45,7 +45,6 @@ print(out) #输出 return 的内容
 # 方法三:斐波那契数列的生成器迭代
 def fib_generator(n):
     i,a,b = 0,0,1
-    out = []
     while i < n:
         yield b
         a,b = b,a+b
