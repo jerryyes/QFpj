@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'QFpj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'qfpj',
+        'NAME': 'QFpj',
         'USER': 'root',
         'PASSWORD': 'Qw123456*',
         'HOST': '127.0.0.1',
