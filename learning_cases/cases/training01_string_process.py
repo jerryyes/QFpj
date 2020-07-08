@@ -26,11 +26,9 @@ class Solution:
             try:
                 trans_result = json.loads(s)
                 Json_format_list.append(trans_result)
-                print(Json_format_list)
-            except json.JSONDecodeError as e:
-                print(e)
+            except json.JSONDecodeError:
                 others_list.append(s)
-                print(others_list)
+        return Json_format_list,others_list
         pass
 
     @staticmethod
@@ -61,4 +59,5 @@ class Solution:
 
 
 if __name__ == '__main__':
-    Solution.solution1_string_to_python_object_by_json_modules()
+    r = Solution.solution1_string_to_python_object_by_json_modules()
+    print(r)
