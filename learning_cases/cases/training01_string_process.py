@@ -6,7 +6,8 @@ import time
 import datetime
 import json
 
-GLOBAL_JSON_STRING_LIST = ["{'time_index_1':'time.time()'}", "{'time_index_2':time.time()}", "{'bool_index_1':True}", "{'bool_index_2':true}"]
+GLOBAL_JSON_STRING_LIST = ["{'time_index_1':'time.time()'}", "{'time_index_2':time.time()}", "{'bool_index_1':True}",
+                           "{'bool_index_2':true}"]
 
 ERROR_NAMESPACE = {'time': datetime, 'true': False}
 FULL_NAMESPACE = {'time': time, 'true': True}
@@ -28,8 +29,7 @@ class Solution:
                 Json_format_list.append(trans_result)
             except json.JSONDecodeError:
                 others_list.append(s)
-        return Json_format_list,others_list
-        pass
+        return Json_format_list, others_list
 
     @staticmethod
     def solution2_string_to_python_object_by_eval():
@@ -39,6 +39,9 @@ class Solution:
         以元组的形式输出，比较两者异同
         :return:ERROR_NAMESPACE_LIST,FULL_NAMESPACE_LIST
         """
+        ERROR_NAMESPACE_LIST = []
+        FULL_NAMESPACE_LIST = []
+
         pass
 
     @staticmethod
@@ -48,7 +51,8 @@ class Solution:
         :return:
         """
         content_dir = []
-        utf_dir_list = [b'\xe6\x88\x91\xe7\x88\xb1\xe5\x90\x83\xe5\xb1\x8e', b'\xe5\x90\x83\xe5\xb1\x8e\xe4\xbd\xbf\xe6\x88\x91\xe5\xbf\xab\xe4\xb9\x90']
+        utf_dir_list = [b'\xe6\x88\x91\xe7\x88\xb1\xe5\x90\x83\xe5\xb1\x8e',
+                        b'\xe5\x90\x83\xe5\xb1\x8e\xe4\xbd\xbf\xe6\x88\x91\xe5\xbf\xab\xe4\xb9\x90']
         dir_list = map(lambda x: x.decode(), utf_dir_list)
         create_template = "__import__('os').mkdir('{dir}')".format
         for node in dir_list:
@@ -59,5 +63,5 @@ class Solution:
 
 
 if __name__ == '__main__':
-    r = Solution.solution1_string_to_python_object_by_json_modules()
-    print(r)
+    Solution.solution3_eval()
+
