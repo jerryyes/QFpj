@@ -42,15 +42,14 @@ class Solution:
         """
         ERROR_NAMESPACE_LIST = []
         FULL_NAMESPACE_LIST = []
-        # EN = {'time': datetime, 'true': False}
-        FN = {'time': time, 'true': True}
+        EN = {'time': datetime, 'true': False}
+        # FN = {'time': time, 'true': True}
         print(locals())
-        print(FN,type(FN))
-        print(dict(FN),type(dict(FN)))
-        for s in GLOBAL_JSON_STRING_LIST:
-            ERROR_NAMESPACE_LIST.append(eval(s, locals()))
-            # FULL_NAMESPACE_LIST.append(eval(s, __locals=FN))
-        return ERROR_NAMESPACE_LIST, FULL_NAMESPACE_LIST
+        print(eval("{'test':time.time()}", None, locals()))
+        # for s in GLOBAL_JSON_STRING_LIST:
+        #     ERROR_NAMESPACE_LIST.append(eval(s, locals()))
+        #     # FULL_NAMESPACE_LIST.append(eval(s, __locals=FN))
+        # return ERROR_NAMESPACE_LIST, FULL_NAMESPACE_LIST
         pass
 
     @staticmethod
