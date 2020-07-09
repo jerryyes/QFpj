@@ -30,6 +30,7 @@ class Solution:
             except json.JSONDecodeError:
                 others_list.append(s)
         return Json_format_list, others_list
+        pass
 
     @staticmethod
     def solution2_string_to_python_object_by_eval():
@@ -41,7 +42,15 @@ class Solution:
         """
         ERROR_NAMESPACE_LIST = []
         FULL_NAMESPACE_LIST = []
-
+        # EN = {'time': datetime, 'true': False}
+        FN = {'time': time, 'true': True}
+        print(locals())
+        print(FN,type(FN))
+        print(dict(FN),type(dict(FN)))
+        for s in GLOBAL_JSON_STRING_LIST:
+            ERROR_NAMESPACE_LIST.append(eval(s, locals()))
+            # FULL_NAMESPACE_LIST.append(eval(s, __locals=FN))
+        return ERROR_NAMESPACE_LIST, FULL_NAMESPACE_LIST
         pass
 
     @staticmethod
@@ -63,5 +72,4 @@ class Solution:
 
 
 if __name__ == '__main__':
-    Solution.solution3_eval()
-
+    Solution.solution2_string_to_python_object_by_eval()
