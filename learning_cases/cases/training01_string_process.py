@@ -42,12 +42,9 @@ class Solution:
         """
         ERROR_NAMESPACE_LIST = []
         FULL_NAMESPACE_LIST = []
-        en_dict = ERROR_NAMESPACE
-        fn_dict = FULL_NAMESPACE
-        print(eval("{'test':time.time()}", {}, fn_dict))
         for s in GLOBAL_JSON_STRING_LIST:
-            ERROR_NAMESPACE_LIST.append(eval(s, {}, en_dict))
-            FULL_NAMESPACE_LIST.append(eval(s, {}, fn_dict))
+            ERROR_NAMESPACE_LIST.append(eval(s, {}, ERROR_NAMESPACE))
+            FULL_NAMESPACE_LIST.append(eval(s, {}, FULL_NAMESPACE))
         return ERROR_NAMESPACE_LIST, FULL_NAMESPACE_LIST
         pass
 
