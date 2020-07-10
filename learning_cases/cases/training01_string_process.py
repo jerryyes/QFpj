@@ -42,14 +42,13 @@ class Solution:
         """
         ERROR_NAMESPACE_LIST = []
         FULL_NAMESPACE_LIST = []
-        EN = {'time': datetime, 'true': False}
-        # FN = {'time': time, 'true': True}
-        print(locals())
-        print(eval("{'test':time.time()}", None, locals()))
-        # for s in GLOBAL_JSON_STRING_LIST:
-        #     ERROR_NAMESPACE_LIST.append(eval(s, locals()))
-        #     # FULL_NAMESPACE_LIST.append(eval(s, __locals=FN))
-        # return ERROR_NAMESPACE_LIST, FULL_NAMESPACE_LIST
+        en_dict = ERROR_NAMESPACE
+        fn_dict = FULL_NAMESPACE
+        print(eval("{'test':time.time()}", {}, fn_dict))
+        for s in GLOBAL_JSON_STRING_LIST:
+            ERROR_NAMESPACE_LIST.append(eval(s, {}, en_dict))
+            FULL_NAMESPACE_LIST.append(eval(s, {}, fn_dict))
+        return ERROR_NAMESPACE_LIST, FULL_NAMESPACE_LIST
         pass
 
     @staticmethod
@@ -71,4 +70,4 @@ class Solution:
 
 
 if __name__ == '__main__':
-    Solution.solution2_string_to_python_object_by_eval()
+    Solution.solution3_eval()
