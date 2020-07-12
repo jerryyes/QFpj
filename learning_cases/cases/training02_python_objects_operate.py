@@ -48,9 +48,12 @@ class Solution:
         :return:[id1,id2,id3,...]
         """
         # NodeList由get_node_list()方法提供
-        NoteList = [{'id': '111', 'parent_id': '0', 'name': 'node111'}, {'id': '222', 'parent_id': '111', 'name': 'node222'},
-                    {'id': '333', 'parent_id': '0', 'name': 'node333'}, {'id': '444', 'parent_id': '111', 'name': 'node444'},
-                    {'id': '555', 'parent_id': '222', 'name': 'node555'}, {'id': '666', 'parent_id': '444', 'name': 'node666'}]
+        NoteList = [{'id': '111', 'parent_id': '0', 'name': 'node111'},
+                    {'id': '222', 'parent_id': '111', 'name': 'node222'},
+                    {'id': '333', 'parent_id': '0', 'name': 'node333'},
+                    {'id': '444', 'parent_id': '111', 'name': 'node444'},
+                    {'id': '555', 'parent_id': '222', 'name': 'node555'},
+                    {'id': '666', 'parent_id': '444', 'name': 'node666'}]
         ChildList = []
         if node_id in [node['id'] for node in NoteList]:
             ChildList.append(node_id)
@@ -73,9 +76,18 @@ class Solution:
         :param truly_result:
         :return:True or False
         """
+        your_list = your_logic
+        truly_list = truly_result
+        if your_list is not None and truly_list is not None:
+            return sorted(your_list) == sorted(truly_list)
+        else:
+            return None
         pass
 
 
 if __name__ == '__main__':
-    print(Solution.solution1_get_children_node_by_id('111'))
+    print(Solution.solution1_get_children_node_by_id())
+    print(Solution.get_truly_result())
+    print(Solution.solution2_verify_solution1_logic(Solution.solution1_get_children_node_by_id(),
+                                                    Solution.get_truly_result()))
     pass
