@@ -16,23 +16,25 @@
 """
 
 import time
+import traceback
 
 
 # -----------------待实现方法1------------------
 def decorator_info(func):
-    def _deco_info():
+    def _deco_info(*args, **kwargs):
         try:
             t_begin = time.time()
             print("%s start at %0.4f" % (func.__name__, t_begin))
-            func()
+            func(*args, **kwargs)
         except:
             print('assert error has raised')
         else:
             print('run success')
         finally:
             t_end = time.time()
-            print("%s end at %0.4f" % (func.__name__,t_end))
-            print("%s executed in %0.4f ms" % (func.__name__,t_end-t_begin))
+            print("%s end at %0.4f" % (func.__name__, t_end))
+            print("%s executed in %0.4f ms" % (func.__name__, t_end - t_begin))
+
     return _deco_info
     pass
 
@@ -40,9 +42,29 @@ def decorator_info(func):
 # -----------------待实现方法2------------------
 def decorator_retry(retry_times=1):
     def _deco_retry(func):
-        def __deco_retry():
+        def __deco_retry(*args, **kwargs):
+            assert retry_times >= 0 and isinstance(retry_times,int),'retry_times inserted is not natural number.'
+            ret = False
+            attemp = 0
+            while attemp <= retry_times:
+                try:
+                    ret = func(*args, **kwargs)
+                except:
+                    traceback.print_exc()
+                    attemp += 1
+                    try:
+                        assert attemp > retry_times, 'retry times useless. exit.'
+                    except:
+                        traceback.print_exc()
+                        continue
+                else:
+                    break
+            print("Total retry times：%s" % (attemp))
+            return ret
             pass
+
         return __deco_retry
+
     return _deco_retry
     pass
 
@@ -54,22 +76,23 @@ class Solution:
         time.sleep(5)
         now_time = int(time.time())
         print(now_time)
-        assert now_time % 2, 'assert error has not raised'
+        # assert now_time % 2, 'assert error has not raised'
+        assert False, 'assert error has raised'
         pass
 
     # -------------------被测方法1-------------------
     @staticmethod
-    @decorator_info()
+    @decorator_info
     def decorator_info_test():
         return Solution.test()
 
     # -------------------被测方法2-------------------
     @staticmethod
-    @decorator_retry(2)
+    @decorator_retry(0)
     def decorator_retry_test():
         return Solution.test()
 
 
 if __name__ == '__main__':
-    Solution.decorator_info_test()
+    # Solution.decorator_info_test()
     Solution.decorator_retry_test()
