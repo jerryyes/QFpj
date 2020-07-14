@@ -20,11 +20,30 @@ import time
 
 # -----------------待实现方法1------------------
 def decorator_info(func):
+    def _deco_info():
+        try:
+            t_begin = time.time()
+            print("%s start at %0.4f" % (func.__name__, t_begin))
+            func()
+        except:
+            print('assert error has raised')
+        else:
+            print('run success')
+        finally:
+            t_end = time.time()
+            print("%s end at %0.4f" % (func.__name__,t_end))
+            print("%s executed in %0.4f ms" % (func.__name__,t_end-t_begin))
+    return _deco_info
     pass
 
 
 # -----------------待实现方法2------------------
 def decorator_retry(retry_times=1):
+    def _deco_retry(func):
+        def __deco_retry():
+            pass
+        return __deco_retry
+    return _deco_retry
     pass
 
 

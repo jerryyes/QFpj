@@ -1,29 +1,35 @@
-import grequests
-import requests
-import bs4
+import time
 
-def err_handler(request, exception):
-    print("请求出错")
 
-headers = {'Accept-Language':'en-GB,en;q=0.9,ko;q=0.8,en;q=0.7'}
-session = requests.session()
+def decorator_info(func):
+    def _deco_info():
+        try:
+            t_begin = time.time()
+            print("%s start at %0.4f" % (func.__name__, t_begin))
+            func()
+        except:
+            print('assert error has raised')
+        else:
+            print('run success')
+        finally:
+            t_end = time.time()
+            print("%s end at %0.4f" % (func.__name__, t_end))
+            print("%s executed in %0.4f ms" % (func.__name__, t_end - t_begin))
 
-req_list = [
-    grequests.get('http://httpbin.org/delay/1', timeout=0.001),   # 超时异常
-    grequests.get('http://fakedomain/'),   # 该域名不存在
-    grequests.get('http://www.kuaidi100.com/query?type=shunfeng&postid=00001111',headers=headers,timeout=300)    #  正常返回500的请求
-]
+    return _deco_info
 
-rs = requests.session()
-re = rs.get('http://www.kuaidi100.com/query?type=shunfeng&postid=00001111',headers=headers,timeout=300)
-if re.status_code == 200:
-    rejson = re.json()
-print(rejson)
 
-r_list = []
-gs = grequests.request('get','http://www.kuaidi100.com/query?type=shunfeng&postid=00001111',headers=headers).response
-print(gs)
-r_list.append(gs)
-res_list = grequests.map(r_list, exception_handler=err_handler)
-print(res_list)
+def test():
+    time.sleep(5)
+    now_time = int(time.time())
+    print(now_time)
+    assert now_time % 2, 'assert error has not raised'
+    pass
 
+
+# -------------------被测方法1-------------------
+@decorator_info
+def decorator_info_test():
+    return test()
+
+decorator_info_test()

@@ -7,6 +7,7 @@
 numbers = input('请输入三个整数(以逗号分隔):')
 
 num_list = list(map(int,numbers.split(','))) #python3.x 中 map 函数返回值类型为迭代器,此处需要转换为 list 类型
+print(num_list)
 
 # 方法一:可用list排序函数实现(返回值类型为 list,改变原list 本身)
 num_list.sort()
