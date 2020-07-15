@@ -44,26 +44,27 @@ def decorator_retry(retry_times=1):
     def _deco_retry(func):
         def __deco_retry(*args, **kwargs):
             assert retry_times >= 0 and isinstance(retry_times, int), 'retry_times inserted is not natural number.'
-            ret = False
+            ret = None
             attemp = 0
+            flag = True
             try:
                 ret = func(*args, **kwargs)
             except:
+                traceback.print_exc()
                 while attemp < retry_times:
                     try:
                         ret = func(*args, **kwargs)
                     except:
                         traceback.print_exc()
-                        attemp += 1
-                        try:
-                            assert attemp < retry_times, 'retry times useless. exit.'
-                        except:
-                            continue
+                        flag = False
                     else:
                         break
+                    finally:
+                        attemp += 1
+                        if attemp == retry_times and not flag:
+                            print("Retry times are useless. Exit.")
             print("Total retry times：%s" % (attemp))
             return ret
-            pass
 
         return __deco_retry
 
@@ -78,8 +79,7 @@ class Solution:
         time.sleep(5)
         now_time = int(time.time())
         print(now_time)
-        # assert now_time % 2, 'assert error has not raised'
-        assert True, 'assert error has raised'
+        assert now_time % 2, 'assert error has not raised'
         pass
 
     # -------------------被测方法1-------------------
@@ -96,5 +96,5 @@ class Solution:
 
 
 if __name__ == '__main__':
-    # Solution.decorator_info_test()
+    Solution.decorator_info_test()
     Solution.decorator_retry_test()
