@@ -35,7 +35,8 @@ class Descriptor:
         pass
 
     def __set__(self, instance, value):
-        self.__time = instance.set_now_time(str(value) + str(instance.update_time()))
+        instance.update_time()
+        self.__time = instance.set_now_time(str(value) + str(instance.get_now_time()))
         pass
 
 
