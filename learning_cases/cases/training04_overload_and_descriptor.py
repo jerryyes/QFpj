@@ -15,6 +15,7 @@ class DictLikeObject:
         return super().__new__(cls)
 
     def __eq__(self, other):
+        return list(self.my_key()) == other
         pass
 
     def __str__(self):
@@ -90,4 +91,4 @@ class Solution:
 
 if __name__ == '__main__':
     Solution.solution1_overload_eq()
-    Solution.solution2_descriptor()
+    # Solution.solution2_descriptor()
