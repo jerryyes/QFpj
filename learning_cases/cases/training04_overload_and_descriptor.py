@@ -15,7 +15,10 @@ class DictLikeObject:
         return super().__new__(cls)
 
     def __eq__(self, other):
-        return list(self.my_key()) == other
+        if isinstance(other, DictLikeObject):
+            return self.__my_dict == other.__my_dict and self.my_key() == other.my_key()
+        elif isinstance(other, list):
+            return list(self.my_key()) == other
         pass
 
     def __str__(self):
@@ -28,9 +31,11 @@ class Descriptor:
     应用于解决方案2
     """
     def __get__(self, instance, owner):
+        return instance.get_now_time()
         pass
 
     def __set__(self, instance, value):
+        self.__time = instance.set_now_time(str(value) + str(instance.update_time()))
         pass
 
 
@@ -90,5 +95,5 @@ class Solution:
 
 
 if __name__ == '__main__':
-    Solution.solution1_overload_eq()
-    # Solution.solution2_descriptor()
+    # Solution.solution1_overload_eq()
+    Solution.solution2_descriptor()
