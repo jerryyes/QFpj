@@ -96,5 +96,5 @@ class Solution:
 
 
 if __name__ == '__main__':
-    # Solution.solution1_overload_eq()
+    Solution.solution1_overload_eq()
     Solution.solution2_descriptor()
