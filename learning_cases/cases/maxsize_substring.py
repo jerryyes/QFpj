@@ -45,12 +45,12 @@ def lengthOfLongestSubstring2(s: str) -> Tuple[str, int]:
             max_len = i+1 - start
             max_str = s[start:i+1] # 不包含位置i+1的元素
 
-        print(max_str,max_len)
+        # print(max_str,max_len)
     return max_str, max_len
 
 
 if __name__ == '__main__':
-    # res = lengthOfLongestSubstring("ss1345ss1345612s134563579abcdefga")
-    # print(res)
+    res = lengthOfLongestSubstring("ss1345ss1345612s134563579abcdefga")
+    print(res)
     res2 = lengthOfLongestSubstring2("ss1345ss1345612s134563579abcdefgabcd")
     print(res2)
