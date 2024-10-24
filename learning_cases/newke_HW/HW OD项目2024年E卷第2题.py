@@ -1,0 +1,24 @@
+# 输入：一个n*m的矩阵，要求找出该矩阵中的一个连续矩形构成的子矩阵，使得该子矩阵的求和最大。
+# 输出：和最大的子矩阵的和。
+
+nm = input("请输入n*m的矩阵：")
+n = int(nm.split()[0])
+m = int(nm.split()[1])
+l = []
+
+for i in range(1,n+1):
+    line = input("请输入矩阵的第%d行对应的%d个值：" % (i,m))
+    l.append(line.split())
+max_sum = float('-inf')
+for row in range(n):
+    column_sums = [0] * m
+    for i in range(row, n):
+        for j in range(m):
+            column_sums[j] += int(l[i][j])
+        current_sum = 0
+        max_local_sum = float('-inf')
+        for s in column_sums:
+            current_sum = max(s, current_sum + s)
+            max_local_sum = max(max_local_sum, current_sum)
+        max_sum = max(max_sum, max_local_sum)
+print("和最大的子矩阵求和结果为：" + str(max_sum))
